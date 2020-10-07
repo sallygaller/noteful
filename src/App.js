@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import './App.css';
-import CONTENT from './dummy-store'
-import Note from './Note'
-import AllFolders from './AllFolders'
-import AllNotes from './AllNotes'
-import NoteSelection from './NoteSelection'
-import FolderSelection from './FolderSelection'
+import CONTENT from './dummy-store';
+import Note from './Note';
+import AllFolders from './AllFolders';
+import AllNotes from './AllNotes';
+import NoteSelection from './NoteSelection';
+import FolderSelection from './FolderSelection';
 
 
 class App extends Component {
@@ -60,9 +61,11 @@ class App extends Component {
             />
             
           <Route
+            history={history}
             path='/note/:noteId'
             render={(props) =>
               <Note
+                
                 note={this.state.store.notes.find(note => note.id === props.match.params.noteId)}
               />}
           /> 
