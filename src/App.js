@@ -3,7 +3,11 @@ import { Route, Link } from 'react-router-dom';
 import './App.css';
 import CONTENT from './dummy-store'
 import Note from './Note'
-import NoteList from './NoteList'
+import AllFolders from './AllFolders'
+import AllNotes from './AllNotes'
+import NoteSelection from './NoteSelection'
+import FolderSelection from './FolderSelection'
+
 
 class App extends Component {
   state = {
@@ -24,42 +28,45 @@ class App extends Component {
           <Link to='/'><h1 >Noteful</h1></Link>
         </header>
         <main>
-          <div className="Group">
-            <div className="Sidebar Item">
-              <p> Choose a folder: </p>
-              <ul>
-                {this.state.store.folders.map(folder =>
-                  <li key={folder.id}>
-                    <Link to={`/folder/${folder.id}`}>
-                      {folder.name}
-                    </Link>
-                  </li>
-                )}
-              </ul>
-            </div>
 
-            <div className="Item-double">
-              <div className="NoteList">
-                <Route
-                  path='/folder/:folderId'
-                  render={(props) =>
-                    <NoteList
-                      note={this.state.store.notes.filter(note => note.folderId === props.match.params.folderId)}
-                    />}
-                />
-              </div>
+          <div className="sideBar">
+            <h3>Folders:</h3>
+            <Route
+              exact path="/"
+              render={(props) =>
+                <AllFolders
+                  folders={this.state.store.folders} />}
+            />
+            <Route
+              path='/folder/:folderId'
+              render={(props) =>
+                <FolderSelection
+                  folders={this.state.store.folders} />}
+            />
+          </div>
 
-              <div className="Note">
-                <Route
-                  path='/note/:noteId'
-                  render={(props) =>
-                    <Note
-                      note={this.state.store.notes.find(note => note.id === props.match.params.noteId)}
-                    />}
-                />
-              </div>
-            </div>
-            </div>
+          <div className="main">
+            <Route
+              exact path="/"
+              render={(props) =>
+                <AllNotes
+                notes={this.state.store.notes}/>}
+            />
+            <Route
+              path='/folder/:folderId'
+              render={(props) =>
+                <NoteSelection
+                note={this.state.store.notes.filter(note => note.folderId === props.match.params.folderId)} /> }
+            />
+            
+          <Route
+            path='/note/:noteId'
+            render={(props) =>
+              <Note
+                note={this.state.store.notes.find(note => note.id === props.match.params.noteId)}
+              />}
+          /> 
+          </div>
         </main>
       </div>
     )

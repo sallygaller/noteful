@@ -1,16 +1,18 @@
 import React from 'react'
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-export default function NoteList(props) {
+export default function AllNotes(props) {
     console.log(props)
     return (
         <div>
+            <h3>Notes:</h3>
             <ul>
-                {props.note.map(note =>
+                {props.notes.map(note =>
                     <li key={note.id}>
                         <Link to={`/note/${note.id}`}>
-                            {note.name}
+                            <h3>{note.name}</h3>
                         </Link>
+                        <p>Date modified: {note.modified}</p>
                     </li>
                 )}
             </ul>
