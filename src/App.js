@@ -9,7 +9,6 @@ import AllNotes from './AllNotes';
 import NoteSelection from './NoteSelection';
 import FolderSelection from './FolderSelection';
 
-
 class App extends Component {
   state = {
     store: CONTENT
@@ -30,8 +29,7 @@ class App extends Component {
         </header>
         <main>
 
-          <div className="sideBar">
-            <h3>Folders:</h3>
+          <div className="SideBar">
             <Route
               exact path="/"
               render={(props) =>
@@ -46,7 +44,7 @@ class App extends Component {
             />
           </div>
 
-          <div className="main">
+          <div className="Main">
             <Route
               exact path="/"
               render={(props) =>
@@ -61,11 +59,9 @@ class App extends Component {
             />
             
           <Route
-            history={history}
             path='/note/:noteId'
             render={(props) =>
               <Note
-                
                 note={this.state.store.notes.find(note => note.id === props.match.params.noteId)}
               />}
           /> 

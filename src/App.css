@@ -1,26 +1,27 @@
 .App {
   font-family: sans-serif;
   margin-left: 25px;
+  grid-template-areas: inherit;
 }
 
 h1 {
   text-align: center;
 }
 
-.Group {
-  display: flex;
-  flex-direction: row;
+h3 {
+  margin-bottom: 5px;
 }
 
-.Item-double {
-  margin-left: 50px;
+a {
+  text-decoration: none;
+  color: royalblue
 }
 
-.Sidebar ul {
+ul {
   list-style: none;
-  padding: 5px;
 }
 
 .Sidebar li {
   padding-bottom: 5px;
 }
+
