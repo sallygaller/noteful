@@ -1,26 +1,71 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { Route, Link } from 'react-router-dom';
 import './App.css';
+import CONTENT from './dummy-store'
+import Note from './Note'
+import NoteList from './NoteList'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    store: CONTENT
+  }
+
+  setStore = store => {
+    this.setState({
+      store: CONTENT
+    })
+  }
+
+  render() {
+    console.log(this.state.store)
+    return (
+      <div className="App">
+        <header>
+          <Link to='/'><h1 >Noteful</h1></Link>
+        </header>
+        <main>
+          <div className="Group">
+            <div className="Sidebar Item">
+              <p> Choose a folder: </p>
+              <ul>
+                {this.state.store.folders.map(folder =>
+                  <li key={folder.id}>
+                    <Link to={`/folder/${folder.id}`}>
+                      {folder.name}
+                    </Link>
+                  </li>
+                )}
+              </ul>
+            </div>
+
+            <div className="Item-double">
+              <div className="NoteList">
+                <Route
+                  path='/folder/:folderId'
+                  render={(props) =>
+                    <NoteList
+                      note={this.state.store.notes.filter(note => note.folderId === props.match.params.folderId)}
+                    />}
+                />
+              </div>
+
+              <div className="Note">
+                <Route
+                  path='/note/:noteId'
+                  render={(props) =>
+                    <Note
+                      note={this.state.store.notes.find(note => note.id === props.match.params.noteId)}
+                    />}
+                />
+              </div>
+            </div>
+            </div>
+        </main>
+      </div>
+    )
+  }
 }
 
 export default App;
+
+
