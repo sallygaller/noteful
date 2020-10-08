@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
+import { Route, Link, Switch } from 'react-router-dom';
 import './App.css';
 import CONTENT from './dummy-store';
 import Note from './Note';
@@ -14,12 +13,6 @@ class App extends Component {
     store: CONTENT
   }
 
-  setStore = store => {
-    this.setState({
-      store: CONTENT
-    })
-  }
-
   render() {
     console.log(this.state.store)
     return (
@@ -30,42 +23,39 @@ class App extends Component {
         <main>
 
           <div className="SideBar">
-            <Route
-              exact path="/"
-              render={(props) =>
-                <AllFolders
-                  folders={this.state.store.folders} />}
-            />
-            <Route
-              path='/folder/:folderId'
-              render={(props) =>
-                <FolderSelection
-                  folders={this.state.store.folders} />}
-            />
+            <AllFolders
+              folders={this.state.store.folders} />
           </div>
 
           <div className="Main">
-            <Route
-              exact path="/"
-              render={(props) =>
-                <AllNotes
-                notes={this.state.store.notes}/>}
-            />
-            <Route
-              path='/folder/:folderId'
-              render={(props) =>
-                <NoteSelection
-                note={this.state.store.notes.filter(note => note.folderId === props.match.params.folderId)} /> }
-            />
-            
-          <Route
-            path='/note/:noteId'
-            render={(props) =>
-              <Note
-                note={this.state.store.notes.find(note => note.id === props.match.params.noteId)}
-              />}
-          /> 
+            <Switch>
+
+              <Route
+                exact path="/"
+                render={(props) =>
+                  <AllNotes
+                    notes={this.state.store.notes} />}
+              />
+              <Route
+                path='/folder/:folderId'
+                render={(props) =>
+                  <NoteSelection
+                    note={this.state.store.notes.filter(note => note.folderId === props.match.params.folderId)} />}
+              />
+
+              <Route
+                path='/note/:noteId'
+                render={(props) =>
+                  <Note
+                    note={this.state.store.notes.find(note => note.id === props.match.params.noteId)}
+                  />}
+              />
+              <Route>
+                <h1>No matching routes!</h1>
+              </Route>
+            </Switch>
           </div>
+
         </main>
       </div>
     )
