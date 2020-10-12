@@ -1,21 +1,42 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import Note from './Note'
+import StoreContext from './StoreContext'
 
-export default function NoteSelection(props) {
-    console.log(props)
+
+export default class NoteListMain extends React.Component {
+  static defaultProps = {
+    match: {
+      params: {}
+    }
+  }
+  static contextType = StoreContext
+
+  render() {
+    const getNotesForFolder = (notes=[], folderId) => (
+        (!folderId)
+          ? notes
+          : notes.filter(note => note.folderId === folderId)
+      )
+    const { folderId } = this.props.match.params
+    const { notes=[] } = this.context
+    const notesForFolder = getNotesForFolder(notes, folderId)
     return (
-        <div>
-            <h3>Notes:</h3>
-            <ul>
-                {props.note.map(note =>
-                    <li key={note.id}>
-                        <Link to={`/note/${note.id}`}>
-                            <h3>{note.name}</h3>
-                        </Link>
-                        <p>Date modified: {note.modified}</p>
-                    </li>
-                )}
-            </ul>
+      <section className='NoteListMain'>
+        <ul>
+          {notesForFolder.map(note =>
+            <li key={note.id}>
+              <Note
+                id={note.id}
+                name={note.name}
+                modified={note.modified}
+              />
+            </li>
+          )}
+        </ul>
+        <div className='NoteListMain__button-container'>
         </div>
+      </section>
     )
+  }
 }
