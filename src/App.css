@@ -1,7 +1,10 @@
 .App {
   font-family: sans-serif;
-  margin-left: 25px;
   grid-template-areas: inherit;
+}
+
+main {
+  margin-left:25px;
 }
 
 h1 {

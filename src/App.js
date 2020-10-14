@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
 import './App.css';
-import Note from './Note';
-import AllFolders from './AllFolders';
-import AllNotes from './AllNotes';
-import NoteSelection from './NoteSelection';
-import NotePage from './NotePage'
 import StoreContext from './StoreContext'
+import Folders from './Folders';
+import NotesSelectList from './NotesSelectList';
+import NoteContent from './NoteContent'
+import NotesList from './NotesList';
+
 
 class App extends Component {
   state = {
@@ -16,9 +16,9 @@ class App extends Component {
 
   handleDeleteNote = noteId => {
     this.setState({
-        notes: this.state.notes.filter(note => note.id !== noteId)
+      notes: this.state.notes.filter(note => note.id !== noteId)
     });
-};
+  };
 
   componentDidMount() {
     console.log("mounted!")
@@ -36,62 +36,48 @@ class App extends Component {
         return Promise.all([notesResponse.json(), foldersResponse.json()])
       })
       .then(([folders, notes]) => {
-        this.setState({notes, folders});
+        this.setState({ notes, folders });
       })
       .catch(error => {
-        console.error({error})
+        console.error({ error })
       })
   }
-
-
 
   render() {
     const value = {
       notes: this.state.notes,
       folders: this.state.folders,
-      deleteNote: this.deleteNote
+      deleteNote: this.handleDeleteNote
     }
-    console.log(value)
-
+    console.log(value.notes)
+    console.log(value.folders)
     return (
 
-      <div className="App">
+      <div>
         <header>
           <Link to='/'><h1 >Noteful</h1></Link>
         </header>
+
         <main>
-
           <StoreContext.Provider value={value}>
-            <div className="SideBar">
-              <AllFolders />
-            </div>
-
-            <div className="Main">
-              <Switch>
-
-                <Route
-                  exact path="/"
-                  component={AllNotes}
-                // render={(props) =>
-                //   <AllNotes
-                //     notes={this.state.store.notes} />}
-                />
-                <Route
-                  path='/folder/:folderId'
-                  component={NoteSelection}
-                // render={(props) =>
-                //   <NoteSelection
-                //     note={this.state.store.notes.filter(
-                //       note => note.folderId === props.match.params.folderId)} 
-                //   />}
-                />
-
-                <Route path="/note/:noteId" component={NotePage} />
-                <Route>
-                  <h1>No matching routes!</h1>
-                </Route>
-              </Switch>
-            </div>
+            <Folders />
+            <Switch>
+              <Route
+                exact path="/"
+                component={NotesList}
+              />
+              <Route
+                path='/folder/:folderId'
+                component={NotesSelectList}
+              />
+              <Route
+                path="/note/:noteId"
+                component={NoteContent}
+              />
+              <Route>
+                <h1>No matching routes!</h1>
+              </Route>
+            </Switch>
           </StoreContext.Provider>
         </main>
       </div>

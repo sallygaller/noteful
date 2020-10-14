@@ -2,14 +2,13 @@ import React from 'react'
 import { NavLink } from 'react-router-dom';
 import StoreContext from './StoreContext';
 
-class AllFolders extends React.Component {
-
+class Folders extends React.Component {
     static contextType = StoreContext;
-
     render() {
         const { folders=[] } = this.context
         return (
             <div>
+                <h3>Folders:</h3>
                 <ul>
                     {folders.map(folder =>
                         <NavLink to={`/folder/${folder.id}`}>
@@ -24,4 +23,4 @@ class AllFolders extends React.Component {
     }
 }
 
-export default AllFolders
+export default Folders

@@ -1,9 +1,14 @@
 import React from 'react'
 import Note from './Note'
 import StoreContext from './StoreContext'
+import { createBrowserHistory } from 'history'
 
+const history = createBrowserHistory();
+function handleBack() {
+  history.goBack();
+}
 
-export default class NotePage extends React.Component {
+class NoteContent extends React.Component {
   static defaultProps = {
     match: {
       params: {}
@@ -22,7 +27,7 @@ export default class NotePage extends React.Component {
     const { noteId } = this.props.match.params
     const note = findNote(notes, noteId) || { content: '' }
     return (
-      <section className='NotePageMain'>
+      <div>
         <Note
           id={note.id}
           name={note.name}
@@ -34,7 +39,15 @@ export default class NotePage extends React.Component {
             <p key={i}>{para}</p>
           )}
         </div>
-      </section>
+        <button
+          type='button'
+          onClick={handleBack}
+        >
+          Back
+        </button>
+      </div>
     )
   }
 }
+
+export default NoteContent;
