@@ -6,6 +6,8 @@ import Folders from './Folders';
 import NotesSelectList from './NotesSelectList';
 import NoteContent from './NoteContent'
 import NotesList from './NotesList';
+import AddFolder from './AddFolder'
+import AddNote from './AddNote'
 
 
 class App extends Component {
@@ -19,6 +21,18 @@ class App extends Component {
       notes: this.state.notes.filter(note => note.id !== noteId)
     });
   };
+
+  handleAddFolder = folder => {
+    this.setState({
+      folders: [...this.state.folders, folder]
+    })
+  }
+
+  handleAddNote = note => {
+    this.setState({
+      notes: [...this.state.notes, note]
+    })
+  }
 
   componentDidMount() {
     console.log("mounted!")
@@ -47,7 +61,9 @@ class App extends Component {
     const value = {
       notes: this.state.notes,
       folders: this.state.folders,
-      deleteNote: this.handleDeleteNote
+      deleteNote: this.handleDeleteNote,
+      addFolder: this.handleAddFolder,
+      addNote: this.handleAddNote
     }
     console.log(value.notes)
     console.log(value.folders)
@@ -61,6 +77,8 @@ class App extends Component {
         <main>
           <StoreContext.Provider value={value}>
             <Folders />
+            <AddFolder />
+            <AddNote />
             <Switch>
               <Route
                 exact path="/"
