@@ -18,7 +18,7 @@ class AddFolder extends React.Component {
         })
         console.log(this.state)
     }
-    
+
     handleSubmit = (e) => {
         e.preventDefault();
         const { folderName } = e.target
@@ -34,24 +34,25 @@ class AddFolder extends React.Component {
                 'content-type': 'application/json'
             }
         })
-        .then(res => {
-            if (!res.ok) {
-                return res.json().then(error => {
-                    throw error
+            .then(res => {
+                if (!res.ok) {
+                    return res.json().then(error => {
+                        throw error
+                    })
+                }
+                return res.json()
+            })
+            .then(data => {
+                console.log(folderName)
+                folderName.value = ''
+                this.context.addFolder(data)
+                this.props.history.push('/')
+            })
+            .catch(error => {
+                this.setState({
+                    error: { error }
                 })
-            }
-            return res.json()
-        })
-        .then(data => {
-            console.log(folderName)
-            folderName.value = ''
-            this.context.addFolder(data)
-            this.props.history.push('/')
-        })
-        .catch(error => {
-            this.setState({ 
-                error: {error} })
-        })
+            })
     }
 
     handleClickCancel = () => {
@@ -62,7 +63,7 @@ class AddFolder extends React.Component {
         const { error } = this.state
         return (
             <div>
-                <h3>Add folder:</h3>
+                <h3 style={{fontSize:"16px"}}>Create folder</h3>
                 <form onSubmit={e => this.handleSubmit(e)}>
                     <input
                         onChange={(e) => this.handleChange(e)}
@@ -73,16 +74,13 @@ class AddFolder extends React.Component {
                         aria-label="Folder name"
                         required
                     />
-                    <button
-                        type="button"
-                        onClick={this.handleClickCancel}>
-                        Cancel
-                    </button>
+                    <br />
                     <button
                         type="submit"
                         aria-label="Submit button">
                         Save
                     </button>
+                    {"    "}
                     <div role="alert">
                         {error && <p>{error.message}</p>}
                     </div>

@@ -1,14 +1,43 @@
 .App {
   font-family: sans-serif;
-  grid-template-areas: inherit;
+  display: grid;
+  grid-template-areas: "sidebar header" "sidebar main";
+  grid-template-columns: 1fr 2.3fr;
+  grid-template-rows: 0px 1fr;
+  min-height: 100vh;
 }
 
-main {
-  margin-left:25px;
+.App__header {
+  background-color: #fff1e6;
+  grid-area: header;
+  padding-left: 16px;
+  padding-top: 32px;
+  margin-bottom: 0px;
 }
+
+.App__header a {
+  color: black;
+}
+
+.App__nav {
+  background-color: #fff1e6;
+  padding-left: 25px;
+  grid-area: sidebar;
+  overflow: auto;
+}
+
+.App__main {
+  background-color: #eddcd2;
+  grid-area: main;
+  overflow: auto;
+  padding-left: 25px;
+}
+
 
 h1 {
   text-align: center;
+  padding-bottom: 25px;
+  margin-bottom: 0px;
 }
 
 h3 {
@@ -17,7 +46,7 @@ h3 {
 
 a {
   text-decoration: none;
-  color: royalblue
+  color: black;
 }
 
 ul {

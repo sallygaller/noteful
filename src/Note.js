@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import StoreContext from './StoreContext'
+import './Note.css'
 
 class Note extends React.Component {
   static defaultProps = {
@@ -36,18 +37,19 @@ class Note extends React.Component {
     const { name, id, modified } = this.props
     return (
       <div>
-        <h3>
+        <h3 style={{ fontSize: "16px" }}>
           <Link to={`/note/${id}`}>
             {name}
           </Link>
         </h3>
+        Date Modified:{' '}{modified}
+        <br />
         <button
           type='button'
           onClick={this.handleClickDelete}
         >
           Delete
         </button>
-        Date Modified:{' '}{modified}
       </div>
     )
   }
