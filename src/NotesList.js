@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import StoreContext from "./StoreContext";
 import Note from "./Note";
+import PropTypes from "prop-types";
 
 class NotesList extends React.Component {
   static defaultProps = {
@@ -25,5 +26,9 @@ class NotesList extends React.Component {
     );
   }
 }
+
+NotesList.propTypes = {
+  notes: PropTypes.array,
+};
 
 export default NotesList;

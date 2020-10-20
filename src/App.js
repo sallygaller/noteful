@@ -9,6 +9,7 @@ import Nav from "./Nav";
 import NoteContent from "./NoteContent";
 import NotesList from "./NotesList";
 import AddFolder from "./AddFolder";
+import Error from "./Error";
 
 class App extends Component {
   state = {
@@ -79,19 +80,26 @@ class App extends Component {
           <StoreContext.Provider value={value}>
             <div className="App">
               <div className="App__nav ">
-                <Nav />
-                <Folders />
+                <Error>
+                  <Folders />
+                  <Nav />
+                </Error>
               </div>
               <div className="App__main">
                 <Switch>
-                  <Route path="/add-folder" component={AddFolder} />
-                  <Route path="/add-note" component={AddNote} />
-                  <Route exact path="/" component={NotesList} />
-                  <Route path="/folder/:folderId" component={NotesSelectList} />
-                  <Route path="/note/:noteId" component={NoteContent} />
-                  <Route>
-                    <h1>No matching routes!</h1>
-                  </Route>
+                  <Error>
+                    <Route path="/add-folder" component={AddFolder} />
+                    <Route path="/add-note" component={AddNote} />
+                    <Route exact path="/" component={NotesList} />
+                    <Route
+                      path="/folder/:folderId"
+                      component={NotesSelectList}
+                    />
+                    <Route path="/note/:noteId" component={NoteContent} />
+                    {/* <Route>
+                      <h1>No matching routes!</h1>
+                    </Route> */}
+                  </Error>
                 </Switch>
               </div>
             </div>

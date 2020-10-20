@@ -52,8 +52,6 @@ class AddNote extends React.Component {
         })
         .then((data) => {
           console.log(note);
-          // noteName.value = ''
-          // noteContent.value = ''
           this.context.addNote(data);
           this.props.history.push("/");
         })
@@ -65,7 +63,7 @@ class AddNote extends React.Component {
         });
     } else {
       this.setState({
-        errorMessage: "Please complete the field",
+        errorMessage: "Please ensure the above fields are completed.",
       });
     }
   };
@@ -74,7 +72,7 @@ class AddNote extends React.Component {
     const { folders = [] } = this.context;
     return (
       <div>
-        <h3 style={{ fontSize: "16px" }}> Create note</h3>
+        <h3 style={{ fontSize: "16px" }}> Add note:</h3>
         <form onSubmit={(e) => this.handleSubmit(e)}>
           <input
             onChange={(e) => this.handleChange(e)}
@@ -106,6 +104,13 @@ class AddNote extends React.Component {
           <br />
           <button type="submit" aria-label="Submit button">
             Save
+          </button>
+          <button
+            type="button"
+            onClick={this.handleClickCancel}
+            aria-label="Cancel button"
+          >
+            Cancel
           </button>
           {this.state.errorMessage ? <p>{this.state.errorMessage}</p> : null}
         </form>
