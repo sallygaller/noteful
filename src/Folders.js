@@ -10,20 +10,19 @@ class Folders extends React.Component {
     const { folders = [] } = this.context;
     return (
       <div>
-        <h3>Folders</h3>
+        <h2>Folders</h2>
         <ul>
-          <NavLink to={`/`}>
-            <li key="All">
+          <li key="All">
+            <NavLink aria-label={"All folders"} to={`/`}>
               <p>All</p>
-            </li>
-          </NavLink>
-          {folders.map((folder) => (
-            <NavLink to={`/folder/${folder.id}`}>
-              {console.log(NavLink)}
-              <li key={folder.id}>
-                <p>{folder.name}</p>
-              </li>
             </NavLink>
+          </li>
+          {folders.map((folder) => (
+            <li key={folder.id}>
+              <NavLink aria-label={folder.name} to={`/folder/${folder.id}`}>
+                <p>{folder.name}</p>
+              </NavLink>
+            </li>
           ))}
         </ul>
       </div>

@@ -13,11 +13,11 @@ class NotesList extends React.Component {
     const { notes = [] } = this.context;
     return (
       <div>
-        <h3>Notes</h3>
+        <h2>Notes</h2>
         <ul>
           {notes.map((note) => (
             <li key={note.id}>
-              <Link to={`/note/${note.id}`}></Link>
+              <Link aria-label={note.name} to={`/note/${note.id}`}></Link>
               <Note id={note.id} name={note.name} modified={note.modified} />
             </li>
           ))}

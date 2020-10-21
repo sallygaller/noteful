@@ -18,11 +18,16 @@ class NotesSelectList extends React.Component {
     const notesForFolder = getNotesForFolder(notes, folderId);
     return (
       <div>
-        <h3>Notes</h3>
+        <h2>Notes</h2>
         <ul>
           {notesForFolder.map((note) => (
             <li key={note.id}>
-              <Note id={note.id} name={note.name} modified={note.modified} />
+              <Note
+                aria-label={note.name}
+                id={note.id}
+                name={note.name}
+                modified={note.modified}
+              />
             </li>
           ))}
         </ul>

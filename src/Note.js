@@ -37,12 +37,18 @@ class Note extends React.Component {
     const { name, id, modified } = this.props;
     return (
       <div>
-        <h3 style={{ fontSize: "16px" }}>
-          <Link to={`/note/${id}`}>{name}</Link>
-        </h3>
+        <p style={{ fontSize: "16px" }}>
+          <Link aria-label={name} to={`/note/${id}`}>
+            {name}
+          </Link>
+        </p>
         Date Modified: {modified}
         <br />
-        <button type="button" onClick={this.handleClickDelete}>
+        <button
+          aria-label="Delete button"
+          type="button"
+          onClick={this.handleClickDelete}
+        >
           Delete
         </button>
       </div>
