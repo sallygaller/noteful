@@ -37,7 +37,12 @@ class Note extends React.Component {
     const { name, id, modified } = this.props;
     return (
       <div>
-        <p style={{ fontSize: "16px" }}>
+        <p
+          style={{
+            fontSize: "16px",
+            fontWeight: "bold",
+          }}
+        >
           <Link aria-label={name} to={`/note/${id}`}>
             {name}
           </Link>
