@@ -12,6 +12,12 @@ class Error extends React.Component {
     return { hasError: true };
   }
 
+  componentDidCatch(error) {
+    this.setState({
+      hasError: true,
+    });
+  }
+
   render() {
     if (this.state.hasError) {
       return <h2>Could not display</h2>;

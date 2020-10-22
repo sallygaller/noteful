@@ -31,7 +31,7 @@ class Folders extends React.Component {
 }
 
 Folders.propTypes = {
-  folders: PropTypes.array,
+  folders: PropTypes.array.isRequired,
 };
 
 export default Folders;
