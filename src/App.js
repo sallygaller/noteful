@@ -11,6 +11,7 @@ import NoteContent from "./NoteContent";
 import NotesList from "./NotesList";
 import AddFolder from "./AddFolder";
 import EditFolder from "./EditFolder";
+import EditNote from "./EditNote";
 import Error from "./Error";
 
 class App extends Component {
@@ -116,7 +117,11 @@ class App extends Component {
                       path="/folder/:folderId"
                       component={NotesSelectList}
                     />
-                    <Route path="/edit/:folderId" component={EditFolder} />
+                    <Route
+                      path="/edit/folder/:folderId"
+                      component={EditFolder}
+                    />
+                    <Route path="/edit/note/:noteId" component={EditNote} />
                     <Route path="/note/:noteId" component={NoteContent} />
                   </Error>
                 </Switch>

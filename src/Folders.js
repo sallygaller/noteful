@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import StoreContext from "./StoreContext";
 import PropTypes from "prop-types";
-import { Route, Link, Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class Folders extends React.Component {
   static contextType = StoreContext;
@@ -23,7 +23,7 @@ class Folders extends React.Component {
               <NavLink aria-label={folder.title} to={`/folder/${folder.id}`}>
                 <p>{folder.title}</p>
               </NavLink>
-              <Link to={`/edit/${folder.id}`}>
+              <Link to={`/edit/folder/${folder.id}`}>
                 <button type="button" aria-label="Edit Folder Button">
                   Edit
                 </button>

@@ -4,11 +4,13 @@ import StoreContext from "./StoreContext";
 import PropTypes from "prop-types";
 import config from "./config";
 import "./Note.css";
+import NotesList from "./NotesList";
 
 class Note extends React.Component {
   static defaultProps = {
     onDeleteNote: () => {},
   };
+
   static contextType = StoreContext;
 
   deleteNoteRequest = (noteId, cn) => {
@@ -56,6 +58,11 @@ class Note extends React.Component {
         >
           Delete
         </button>
+        <Link to={`/edit/note/${id}`}>
+          <button type="button" aria-label="Edit Note Button">
+            Edit
+          </button>
+        </Link>
       </div>
     );
   }

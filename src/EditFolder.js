@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import config from "./config";
 import StoreContext from "./StoreContext";
-import "./EditFolder.css";
 
 class EditFolder extends React.Component {
   static propTypes = {
@@ -87,7 +86,7 @@ class EditFolder extends React.Component {
     const { error, title } = this.state;
     return (
       <section>
-        <h2>Edit bookmark</h2>
+        <h2>Edit folder</h2>
         <form onSubmit={this.handleSubmit}>
           <div role="alert">{error && <p>{error.message}</p>}</div>
           <input type="hidden" name="id" />
