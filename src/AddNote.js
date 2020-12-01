@@ -16,22 +16,6 @@ class AddNote extends React.Component {
   state = {
     error: null,
   };
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     title: "",
-  //     content: "",
-  //     folderId: "",
-  //     modified: "",
-  //     errorMessage: null,
-  //   };
-  // }
-
-  handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  };
 
   handleClickCancel = () => {
     this.props.history.push("/");
@@ -39,10 +23,11 @@ class AddNote extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const { title, content, folderId } = e.target;
     const note = {
-      title: this.state.title,
-      content: this.state.content,
-      folder_id: Number(this.state.folderId),
+      title: title.value,
+      content: content.value,
+      folder_id: Number(folderId.value),
       modified: new Date(),
     };
     if (note.title) {
@@ -85,8 +70,6 @@ class AddNote extends React.Component {
         <h3 style={{ fontSize: "16px" }}> Add note:</h3>
         <form onSubmit={(e) => this.handleSubmit(e)}>
           <input
-            onChange={(e) => this.handleChange(e)}
-            value={this.state.title}
             type="text"
             name="title"
             placeholder="Note name"
@@ -94,7 +77,7 @@ class AddNote extends React.Component {
             required
           />
           <label style={{ fontSize: "16px" }}>Select folder</label>
-          <select name="folderId" onChange={(e) => this.handleChange(e)}>
+          <select name="folderId">
             {folders.map((folder) => (
               <option id={folder.id} value={folder.id} name="folder_id">
                 {folder.title}
@@ -104,8 +87,6 @@ class AddNote extends React.Component {
           <br />
           <input
             className="Note__Content"
-            onChange={(e) => this.handleChange(e)}
-            value={this.state.content}
             type="text"
             name="content"
             aria-label="Note content"

@@ -1,31 +1,28 @@
 import React from "react";
 import StoreContext from "./StoreContext";
+import PropTypes from "prop-types";
 import config from "./config";
 
 class AddFolder extends React.Component {
+  static propTypes = {
+    history: PropTypes.shape({
+      push: PropTypes.func,
+    }).isRequired,
+  };
+
   static contextType = StoreContext;
 
-  constructor() {
-    super();
-    this.state = {
-      title: "",
-      errorMessage: null,
-    };
-  }
-
-  handleChange(e) {
-    this.setState({
-      title: e.target.value,
-    });
-    console.log(this.state);
-  }
+  state = {
+    error: null,
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { folderTitle } = e.target;
+    const { title } = e.target;
     const folder = {
-      title: this.state.title,
+      title: title.value,
     };
+    this.setState({ error: null });
     if (folder.title) {
       fetch(config.API_ENDPOINT_FOLDERS, {
         method: "POST",
@@ -43,8 +40,6 @@ class AddFolder extends React.Component {
           return res.json();
         })
         .then((data) => {
-          console.log(folderTitle);
-          folderTitle.value = "";
           this.context.addFolder(data);
           this.props.history.push("/");
         })
@@ -71,10 +66,8 @@ class AddFolder extends React.Component {
         <h3 style={{ fontSize: "16px" }}>Add folder</h3>
         <form onSubmit={(e) => this.handleSubmit(e)}>
           <input
-            onChange={(e) => this.handleChange(e)}
-            value={this.state.title}
             type="text"
-            name="folderTitle"
+            name="title"
             placeholder="Folder name"
             aria-label="Folder name"
             required
