@@ -1,10 +1,11 @@
-import React from 'react'
+import React from "react";
 
 export default React.createContext({
-   notes: [],
-   folders: [],
-   addNote: () => {},
-   addFolder: () => {},
-   deleteNote: () => {},
-})
-
+  notes: [],
+  folders: [],
+  addNote: () => {},
+  addFolder: () => {},
+  deleteNote: () => {},
+  updateNote: () => {},
+  updateFolder: () => {},
+});

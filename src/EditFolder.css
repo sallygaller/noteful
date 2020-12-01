@@ -1,0 +1,40 @@
+  
+form {
+    padding-bottom: 16px;
+    max-width: 332px;
+  }
+  
+  label {
+    display: block;
+    font-size: 16px;
+    padding-bottom: 8px;
+  }
+  
+input,
+textarea,
+select {
+    font-size: 14px;
+    padding: 8px;
+    margin-bottom: 8px;
+  }
+  
+select {
+    height: 33px;
+  }
+  
+button {
+    background-color: #a5a58d;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 0;
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  button:hover {
+    background-color: #b7b7a4;
+  }

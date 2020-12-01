@@ -10,6 +10,7 @@ import Nav from "./Nav";
 import NoteContent from "./NoteContent";
 import NotesList from "./NotesList";
 import AddFolder from "./AddFolder";
+import EditFolder from "./EditFolder";
 import Error from "./Error";
 
 class App extends Component {
@@ -34,6 +35,22 @@ class App extends Component {
   handleAddNote = (note) => {
     this.setState({
       notes: [...this.state.notes, note],
+    });
+  };
+
+  handleUpdateNote = (updatedNote) => {
+    this.setState({
+      notes: this.state.notes.map((n) =>
+        n.id !== updatedNote.id ? n : updatedNote
+      ),
+    });
+  };
+
+  handleUpdateFolder = (updatedFolder) => {
+    this.setState({
+      notes: this.state.notes.map((n) =>
+        n.id !== updatedFolder.id ? n : updatedFolder
+      ),
     });
   };
 
@@ -67,6 +84,8 @@ class App extends Component {
       deleteNote: this.handleDeleteNote,
       addFolder: this.handleAddFolder,
       addNote: this.handleAddNote,
+      updateNote: this.handleUpdateNote,
+      updateFolder: this.handleUpdateFolder,
     };
     return (
       <div>
@@ -97,6 +116,7 @@ class App extends Component {
                       path="/folder/:folderId"
                       component={NotesSelectList}
                     />
+                    <Route path="/edit/:folderId" component={EditFolder} />
                     <Route path="/note/:noteId" component={NoteContent} />
                   </Error>
                 </Switch>
