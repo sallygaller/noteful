@@ -17,8 +17,13 @@ class NotesList extends React.Component {
         <ul>
           {notes.map((note) => (
             <li key={note.id}>
-              <Link aria-label={note.name} to={`/note/${note.id}`}></Link>
-              <Note id={note.id} name={note.name} modified={note.modified} />
+              <Link aria-label={note.title} to={`/note/${note.id}`}></Link>
+              <Note
+                id={note.id}
+                title={note.title}
+                modified={note.modified}
+                folder_id={note.folder_id}
+              />
             </li>
           ))}
         </ul>

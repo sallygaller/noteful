@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Route, Link, Switch } from "react-router-dom";
 import "./App.css";
+import config from "./config";
 import StoreContext from "./StoreContext";
 import Folders from "./Folders";
 import NotesSelectList from "./NotesSelectList";
@@ -18,8 +19,9 @@ class App extends Component {
   };
 
   handleDeleteNote = (noteId) => {
+    const newNotes = this.state.notes.filter((note) => note.id !== noteId);
     this.setState({
-      notes: this.state.notes.filter((note) => note.id !== noteId),
+      notes: newNotes,
     });
   };
 
@@ -38,8 +40,8 @@ class App extends Component {
   componentDidMount() {
     console.log("mounted!");
     Promise.all([
-      fetch(`http://localhost:9090/folders`),
-      fetch(`http://localhost:9090/notes`),
+      fetch(config.API_ENDPOINT_FOLDERS),
+      fetch(config.API_ENDPOINT_NOTES),
     ])
       .then(([notesResponse, foldersResponse]) => {
         if (!foldersResponse.ok) {
@@ -96,9 +98,6 @@ class App extends Component {
                       component={NotesSelectList}
                     />
                     <Route path="/note/:noteId" component={NoteContent} />
-                    {/* <Route>
-                      <h1>No matching routes!</h1>
-                    </Route> */}
                   </Error>
                 </Switch>
               </div>

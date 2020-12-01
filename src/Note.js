@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import StoreContext from "./StoreContext";
 import PropTypes from "prop-types";
+import config from "./config";
 import "./Note.css";
 
 class Note extends React.Component {
@@ -10,23 +11,20 @@ class Note extends React.Component {
   };
   static contextType = StoreContext;
 
-  handleClickDelete = (e) => {
-    e.preventDefault();
-    const noteId = this.props.id;
-
-    fetch(`http://localhost:9090/notes/${noteId}`, {
+  deleteNoteRequest = (noteId, cn) => {
+    fetch(config.API_ENDPOINT_NOTES + `/${noteId}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
       },
     })
       .then((response) => {
-        if (!response.ok) return response.json().then((e) => Promise.reject(e));
+        if (!response.ok)
+          return response.json().then((error) => Promise.reject(error));
         return response.json();
       })
-      .then(() => {
-        this.context.deleteNote(noteId);
-        this.props.onDeleteNote(noteId);
+      .then((data) => {
+        cn(noteId);
       })
       .catch((error) => {
         console.error({ error });
@@ -34,7 +32,7 @@ class Note extends React.Component {
   };
 
   render() {
-    const { name, id, modified } = this.props;
+    const { title, id, modified } = this.props;
     return (
       <div>
         <p
@@ -43,8 +41,8 @@ class Note extends React.Component {
             fontWeight: "bold",
           }}
         >
-          <Link aria-label={name} to={`/note/${id}`}>
-            {name}
+          <Link aria-label={title} to={`/note/${id}`}>
+            {title}
           </Link>
         </p>
         Date Modified: {modified}
@@ -52,7 +50,9 @@ class Note extends React.Component {
         <button
           aria-label="Delete button"
           type="button"
-          onClick={this.handleClickDelete}
+          onClick={() =>
+            this.deleteNoteRequest(id, StoreContext.deleteNoteRequest)
+          }
         >
           Delete
         </button>
@@ -62,8 +62,8 @@ class Note extends React.Component {
 }
 
 Note.propTypes = {
-  name: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   modified: PropTypes.string.isRequired,
 };
 

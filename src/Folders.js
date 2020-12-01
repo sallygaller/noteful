@@ -19,8 +19,8 @@ class Folders extends React.Component {
           </li>
           {folders.map((folder) => (
             <li key={folder.id}>
-              <NavLink aria-label={folder.name} to={`/folder/${folder.id}`}>
-                <p>{folder.name}</p>
+              <NavLink aria-label={folder.title} to={`/folder/${folder.id}`}>
+                <p>{folder.title}</p>
               </NavLink>
             </li>
           ))}

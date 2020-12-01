@@ -11,11 +11,14 @@ class NotesSelectList extends React.Component {
   static contextType = StoreContext;
 
   render() {
-    const getNotesForFolder = (notes = [], folderId) =>
-      !folderId ? notes : notes.filter((note) => note.folderId === folderId);
+    const getNotesForFolder = (notes = [], folderIdNum) =>
+      !folderIdNum
+        ? notes
+        : notes.filter((note) => note.folder_id === folderIdNum);
     const { folderId } = this.props.match.params;
+    const folderIdNum = parseInt(folderId);
     const { notes = [] } = this.context;
-    const notesForFolder = getNotesForFolder(notes, folderId);
+    const notesForFolder = getNotesForFolder(notes, folderIdNum);
     return (
       <div>
         <h2>Notes</h2>
@@ -23,9 +26,9 @@ class NotesSelectList extends React.Component {
           {notesForFolder.map((note) => (
             <li key={note.id}>
               <Note
-                aria-label={note.name}
+                aria-label={note.title}
                 id={note.id}
-                name={note.name}
+                title={note.title}
                 modified={note.modified}
               />
             </li>

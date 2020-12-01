@@ -1,20 +1,31 @@
 import React from "react";
+import PropTypes from "prop-types";
 import StoreContext from "./StoreContext";
 import "./AddNote.css";
+import config from "./config";
 
 class AddNote extends React.Component {
+  static propTypes = {
+    history: PropTypes.shape({
+      push: PropTypes.func,
+    }).isRequired,
+  };
+
   static contextType = StoreContext;
 
-  constructor() {
-    super();
-    this.state = {
-      name: "",
-      content: "",
-      folderId: "",
-      modified: "",
-      errorMessage: null,
-    };
-  }
+  state = {
+    error: null,
+  };
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     title: "",
+  //     content: "",
+  //     folderId: "",
+  //     modified: "",
+  //     errorMessage: null,
+  //   };
+  // }
 
   handleChange = (e) => {
     this.setState({
@@ -29,13 +40,13 @@ class AddNote extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const note = {
-      name: this.state.name,
+      title: this.state.title,
       content: this.state.content,
-      folderId: this.state.folderId,
+      folder_id: Number(this.state.folderId),
       modified: new Date(),
     };
-    if (note.name) {
-      fetch(`http://localhost:9090/notes`, {
+    if (note.title) {
+      fetch(config.API_ENDPOINT_NOTES, {
         method: "POST",
         body: JSON.stringify(note),
         headers: {
@@ -51,7 +62,6 @@ class AddNote extends React.Component {
           return res.json();
         })
         .then((data) => {
-          console.log(note);
           this.context.addNote(data);
           this.props.history.push("/");
         })
@@ -76,9 +86,9 @@ class AddNote extends React.Component {
         <form onSubmit={(e) => this.handleSubmit(e)}>
           <input
             onChange={(e) => this.handleChange(e)}
-            value={this.state.name}
+            value={this.state.title}
             type="text"
-            name="name"
+            name="title"
             placeholder="Note name"
             aria-label="Note name"
             required
@@ -86,8 +96,8 @@ class AddNote extends React.Component {
           <label style={{ fontSize: "16px" }}>Select folder</label>
           <select name="folderId" onChange={(e) => this.handleChange(e)}>
             {folders.map((folder) => (
-              <option id={folder.id} value={folder.id} name="folderId">
-                {folder.name}
+              <option id={folder.id} value={folder.id} name="folder_id">
+                {folder.title}
               </option>
             ))}
           </select>

@@ -21,16 +21,17 @@ class NoteContent extends React.Component {
   };
 
   render() {
-    const findNote = (notes = [], noteId) =>
-      notes.find((note) => note.id === noteId);
+    const findNote = (notes = [], noteIdNum) =>
+      notes.find((note) => note.id === noteIdNum);
     const { notes = [] } = this.context;
     const { noteId } = this.props.match.params;
-    const note = findNote(notes, noteId) || { content: "" };
+    const noteIdNum = parseInt(noteId);
+    const note = findNote(notes, noteIdNum) || { content: "" };
     return (
       <div>
         <Note
           id={note.id}
-          name={note.name}
+          title={note.title}
           modified={note.modified}
           onDeleteNote={this.handleDeleteNote}
         />
