@@ -1,0 +1,14 @@
+.Button__add {
+    background-color: #a5a58d;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 6px;
+    text-align: center;
+    margin-top: 0px;
+    text-decoration: none;
+    font-weight: bold;
+    border-color: black;
+    border-width: medium;
+    margin-right: 10px;
+}

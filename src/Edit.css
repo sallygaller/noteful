@@ -1,4 +1,4 @@
-  
+ 
 form {
     padding-bottom: 16px;
     max-width: 332px;
@@ -10,17 +10,17 @@ form {
     padding-bottom: 8px;
   }
   
-input,
-textarea,
-select {
+input {
     font-size: 14px;
     padding: 8px;
     margin-bottom: 8px;
+    font-family: sans-serif;
   }
-  
-select {
-    height: 33px;
-  }
+
+textarea {
+  font-size: 14px;
+  width: 125px;
+}
   
 button {
     background-color: #a5a58d;
@@ -33,13 +33,9 @@ button {
     padding: 8px;
     text-align: center;
     text-decoration: none;
+    margin-right: 5px;
   }
 
   button:hover {
     background-color: #b7b7a4;
-  }
-
-  .Note__Content {
-      width: 400px;
-      padding-bottom: 115px;
   }

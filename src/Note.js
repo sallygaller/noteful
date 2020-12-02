@@ -4,7 +4,6 @@ import StoreContext from "./StoreContext";
 import PropTypes from "prop-types";
 import config from "./config";
 import "./Note.css";
-import NotesList from "./NotesList";
 
 class Note extends React.Component {
   static defaultProps = {
@@ -37,32 +36,38 @@ class Note extends React.Component {
     const { title, id, modified } = this.props;
     return (
       <div>
-        <p
-          style={{
-            fontSize: "16px",
-            fontWeight: "bold",
-          }}
-        >
-          <Link aria-label={title} to={`/note/${id}`}>
-            {title}
-          </Link>
-        </p>
-        Date Modified: {modified}
-        <br />
-        <button
-          aria-label="Delete button"
-          type="button"
-          onClick={() =>
-            this.deleteNoteRequest(id, StoreContext.deleteNoteRequest)
-          }
-        >
-          Delete
-        </button>
-        <Link to={`/edit/note/${id}`}>
-          <button type="button" aria-label="Edit Note Button">
-            Edit
+        <div className="Group">
+          <p
+            style={{
+              fontSize: "16px",
+              fontWeight: "bold",
+            }}
+          >
+            <Link aria-label={title} to={`/note/${id}`}>
+              {title}
+            </Link>
+          </p>
+          <button
+            aria-label="Delete button"
+            className="Button__small"
+            type="button"
+            onClick={() =>
+              this.deleteNoteRequest(id, StoreContext.deleteNoteRequest)
+            }
+          >
+            Delete
           </button>
-        </Link>
+          <Link to={`/edit/note/${id}`}>
+            <button
+              type="button"
+              aria-label="Edit Note Button"
+              className="Button__small"
+            >
+              Edit
+            </button>
+          </Link>
+        </div>
+        <p className="Text__modified">Date modified: {modified}</p>
       </div>
     );
   }

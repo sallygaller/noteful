@@ -58,3 +58,44 @@ ul {
   padding-bottom: 5px;
 }
 
+.Button__edit_folder {
+    background-color: #eddcd2;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 12px;
+    padding: 4px;
+    text-align: center;
+    margin-top: 0px;
+    text-decoration: none;
+    font-weight: normal;
+    border-color: black;
+    border-width: medium;
+    margin-left: 10px;
+  }
+
+  .Modified {
+    font-size: 14px;
+    margin-top: 0px;
+  }
+
+  .Button__small {
+    background-color: #a5a58d;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 12px;
+    padding: 4px;
+    text-align: center;
+    margin-top: 0px;
+    text-decoration: none;
+    font-weight: normal;
+    border-color: black;
+    border-width: medium;
+    margin-left: 10px;
+  }
+
+  .Group {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+

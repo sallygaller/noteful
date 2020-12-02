@@ -19,12 +19,16 @@ class Folders extends React.Component {
             </NavLink>
           </li>
           {folders.map((folder) => (
-            <li key={folder.id}>
+            <li className="Group" key={folder.id}>
               <NavLink aria-label={folder.title} to={`/folder/${folder.id}`}>
                 <p>{folder.title}</p>
               </NavLink>
               <Link to={`/edit/folder/${folder.id}`}>
-                <button type="button" aria-label="Edit Folder Button">
+                <button
+                  type="button"
+                  aria-label="Edit Folder Button"
+                  className="Button__edit_folder"
+                >
                   Edit
                 </button>
               </Link>

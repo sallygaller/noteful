@@ -4,16 +4,20 @@ form {
     max-width: 332px;
   }
   
-  label {
+label {
     display: block;
     font-size: 16px;
     padding-bottom: 8px;
   }
-  
+ 
+h3 {
+  font-size: 16px
+}  
+
 input,
 textarea,
 select {
-    font-size: 14px;
+    font-size: 12px;
     padding: 8px;
     margin-bottom: 8px;
   }
@@ -37,4 +41,9 @@ button {
 
   button:hover {
     background-color: #b7b7a4;
+  }
+
+  .Note__Content {
+      width: 400px;
+      padding-bottom: 115px;
   }

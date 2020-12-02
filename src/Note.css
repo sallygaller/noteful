@@ -5,3 +5,8 @@ ul {
 button {
     margin-top: 5px;
 }
+
+.Text__modified {
+    font-size: 14px;
+    margin-top: 0px;
+}

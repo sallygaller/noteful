@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import StoreContext from "./StoreContext";
-import "./AddNote.css";
+import "./Add.css";
 import config from "./config";
 
 class AddNote extends React.Component {
@@ -67,7 +67,7 @@ class AddNote extends React.Component {
     const { folders = [] } = this.context;
     return (
       <div>
-        <h3 style={{ fontSize: "16px" }}> Add note:</h3>
+        <h3>Add Note</h3>
         <form onSubmit={(e) => this.handleSubmit(e)}>
           <input
             type="text"
@@ -76,7 +76,7 @@ class AddNote extends React.Component {
             aria-label="Note name"
             required
           />
-          <label style={{ fontSize: "16px" }}>Select folder</label>
+          <label style={{ fontSize: "14px" }}>Select folder</label>
           <select name="folderId">
             {folders.map((folder) => (
               <option id={folder.id} value={folder.id} name="folder_id">
@@ -92,17 +92,18 @@ class AddNote extends React.Component {
             aria-label="Note content"
             required
           />
-          <br />
-          <button type="submit" aria-label="Submit button">
-            Save
-          </button>
-          <button
-            type="button"
-            onClick={this.handleClickCancel}
-            aria-label="Cancel button"
-          >
-            Cancel
-          </button>
+          <div className="Group">
+            <button type="submit" aria-label="Submit button">
+              Save
+            </button>
+            <button
+              type="button"
+              onClick={this.handleClickCancel}
+              aria-label="Cancel button"
+            >
+              Cancel
+            </button>
+          </div>
           {this.state.errorMessage ? <p>{this.state.errorMessage}</p> : null}
         </form>
       </div>

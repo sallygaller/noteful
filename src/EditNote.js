@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import config from "./config";
 import StoreContext from "./StoreContext";
+import "./Edit.css";
 
 class EditNote extends React.Component {
   static propTypes = {
@@ -36,6 +37,7 @@ class EditNote extends React.Component {
           id: responseData.id,
           title: responseData.title,
           content: responseData.content,
+          modified: new Date(),
         });
       })
       .catch((error) => {
@@ -118,11 +120,17 @@ class EditNote extends React.Component {
               onChange={this.handleChangeContent}
             />
           </div>
-          <div>
-            <button type="button" onClick={this.handleClickCancel}>
+          <div className="Group">
+            <button
+              className="Small_button"
+              type="button"
+              onClick={this.handleClickCancel}
+            >
               Cancel
             </button>{" "}
-            <button type="submit">Save</button>
+            <button className="Small_button" type="submit">
+              Save
+            </button>
           </div>
         </form>
       </section>

@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import config from "./config";
 import StoreContext from "./StoreContext";
+import "./Edit.css";
 
 class EditFolder extends React.Component {
   static propTypes = {
@@ -101,7 +102,7 @@ class EditFolder extends React.Component {
               onChange={this.handleChangeTitle}
             />
           </div>
-          <div>
+          <div className="Group">
             <button type="button" onClick={this.handleClickCancel}>
               Cancel
             </button>{" "}

@@ -2,6 +2,7 @@ import React from "react";
 import StoreContext from "./StoreContext";
 import PropTypes from "prop-types";
 import config from "./config";
+import "./Add.css";
 
 class AddFolder extends React.Component {
   static propTypes = {
@@ -63,7 +64,7 @@ class AddFolder extends React.Component {
   render() {
     return (
       <div>
-        <h3 style={{ fontSize: "16px" }}>Add folder</h3>
+        <h3>Add Folder</h3>
         <form onSubmit={(e) => this.handleSubmit(e)}>
           <input
             type="text"
@@ -72,17 +73,18 @@ class AddFolder extends React.Component {
             aria-label="Folder name"
             required
           />
-          <br />
-          <button type="submit" aria-label="Submit button">
-            Save
-          </button>
-          <button
-            type="button"
-            onClick={this.handleClickCancel}
-            aria-label="Cancel button"
-          >
-            Cancel
-          </button>
+          <div className="Group">
+            <button type="submit" aria-label="Submit button">
+              Save
+            </button>
+            <button
+              type="button"
+              onClick={this.handleClickCancel}
+              aria-label="Cancel button"
+            >
+              Cancel
+            </button>
+          </div>
           {this.state.errorMessage ? <p>{this.state.errorMessage}</p> : null}
         </form>
       </div>
