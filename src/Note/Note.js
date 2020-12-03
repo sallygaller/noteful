@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
-import StoreContext from "./StoreContext";
 import PropTypes from "prop-types";
-import config from "./config";
+import StoreContext from "../StoreContext";
+import config from "../config";
 import "./Note.css";
 
 class Note extends React.Component {
@@ -37,7 +37,7 @@ class Note extends React.Component {
     const { title, id, modified } = this.props;
     return (
       <div>
-        <div className="Group">
+        <div className="group">
           <p
             style={{
               fontSize: "16px",
@@ -48,9 +48,18 @@ class Note extends React.Component {
               {title}
             </Link>
           </p>
+          <Link to={`/edit/note/${id}`}>
+            <button
+              type="button"
+              aria-label="Edit Note Button"
+              className="Note-button"
+            >
+              Edit
+            </button>
+          </Link>
           <button
             aria-label="Delete button"
-            className="Button__small"
+            className="Note-button"
             type="button"
             onClick={() =>
               this.deleteNoteRequest(id, StoreContext.deleteNoteRequest)
@@ -58,17 +67,8 @@ class Note extends React.Component {
           >
             Delete
           </button>
-          <Link to={`/edit/note/${id}`}>
-            <button
-              type="button"
-              aria-label="Edit Note Button"
-              className="Button__small"
-            >
-              Edit
-            </button>
-          </Link>
         </div>
-        <p className="Text__modified">
+        <p className="Note-modified">
           Date modified: {format(new Date(modified), "PPpp")}
         </p>
       </div>

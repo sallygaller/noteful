@@ -5,12 +5,12 @@ import "./Nav.css";
 export default function Nav(props) {
   return (
     <nav>
-      <div className="Group">
+      <div className="group">
         <Link to={"/add-note"}>
           <button
             type="button"
             aria-label="Add Note Button"
-            className="Button__add"
+            className="Nav-add-button"
           >
             Add Note
           </button>
@@ -19,7 +19,7 @@ export default function Nav(props) {
           <button
             type="button"
             aria-label="Add Folder Button"
-            className="Button__add"
+            className="Nav-add-button"
           >
             Add Folder
           </button>

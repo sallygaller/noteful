@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import config from "./config";
-import StoreContext from "./StoreContext";
-import "./Edit.css";
+import config from "../config";
+import StoreContext from "../StoreContext";
+import "./EditFolder.css";
 
-class EditNote extends React.Component {
+class EditFolder extends React.Component {
   static propTypes = {
     match: PropTypes.shape({
       params: PropTypes.object,
@@ -17,15 +17,13 @@ class EditNote extends React.Component {
   static contextType = StoreContext;
 
   state = {
-    error: null,
     id: "",
     title: "",
-    content: "",
   };
 
   componentDidMount() {
-    const { noteId } = this.props.match.params;
-    fetch(config.API_ENDPOINT_NOTES + `/${noteId}`, {
+    const { folderId } = this.props.match.params;
+    fetch(config.API_ENDPOINT_FOLDERS + `/${folderId}`, {
       method: "GET",
     })
       .then((res) => {
@@ -36,8 +34,6 @@ class EditNote extends React.Component {
         this.setState({
           id: responseData.id,
           title: responseData.title,
-          content: responseData.content,
-          modified: new Date(),
         });
       })
       .catch((error) => {
@@ -50,18 +46,14 @@ class EditNote extends React.Component {
     this.setState({ title: e.target.value });
   };
 
-  handleChangeContent = (e) => {
-    this.setState({ content: e.target.value });
-  };
-
   handleSubmit = (e) => {
     e.preventDefault();
-    const { noteId } = this.props.match.params;
-    const { id, title, content } = this.state;
-    const newNote = { id, title, content };
-    fetch(config.API_ENDPOINT_NOTES + `/${noteId}`, {
+    const { folderId } = this.props.match.params;
+    const { id, title } = this.state;
+    const newFolder = { id, title };
+    fetch(config.API_ENDPOINT_FOLDERS + `/${folderId}`, {
       method: "PATCH",
-      body: JSON.stringify(newNote),
+      body: JSON.stringify(newFolder),
       headers: {
         "content-type": "application/json",
       },
@@ -70,8 +62,8 @@ class EditNote extends React.Component {
         if (!res.ok) return res.json().then((error) => Promise.reject(error));
       })
       .then(() => {
-        this.resetFields(newNote);
-        this.context.updateNote(newNote);
+        this.resetFields(newFolder);
+        this.context.updateFolder(newFolder);
         this.props.history.push("/");
       })
       .catch((error) => {
@@ -84,7 +76,6 @@ class EditNote extends React.Component {
     this.setState({
       id: newFields.id || "",
       title: newFields.title || "",
-      content: newFields.content || "",
     });
   };
 
@@ -93,44 +84,36 @@ class EditNote extends React.Component {
   };
 
   render() {
-    const { error, title, content } = this.state;
+    const { error, title } = this.state;
     return (
       <section>
-        <h2>Edit note</h2>
+        <h2 className="EditFolder-h2">Edit folder</h2>
         <form onSubmit={this.handleSubmit}>
           <div role="alert">{error && <p>{error.message}</p>}</div>
           <input type="hidden" name="id" />
           <div>
-            <label htmlFor="title">Title</label>
+            <label htmlFor="title">Title </label>
             <input
               type="text"
               name="title"
               id="title"
               required
+              className="EditFolder-input"
               value={title}
               onChange={this.handleChangeTitle}
             />
           </div>
-          <div>
-            <label htmlFor="content">Content</label>
-            <textarea
-              name="content"
-              id="content"
-              value={content}
-              onChange={this.handleChangeContent}
-            />
-          </div>
-          <div className="Group">
+          <div className="group">
+            <button className="EditFolder-button" type="submit">
+              Save
+            </button>
             <button
-              className="Small_button"
+              className="EditFolder-button"
               type="button"
               onClick={this.handleClickCancel}
             >
               Cancel
             </button>{" "}
-            <button className="Small_button" type="submit">
-              Save
-            </button>
           </div>
         </form>
       </section>
@@ -138,4 +121,4 @@ class EditNote extends React.Component {
   }
 }
 
-export default EditNote;
+export default EditFolder;

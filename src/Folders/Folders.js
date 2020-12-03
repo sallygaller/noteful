@@ -1,8 +1,8 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import StoreContext from "./StoreContext";
+import { NavLink, Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import StoreContext from "../StoreContext";
+import "./Folders.css";
 
 class Folders extends React.Component {
   static contextType = StoreContext;
@@ -24,7 +24,7 @@ class Folders extends React.Component {
     const { folders = [] } = this.context;
     return (
       <div>
-        <h2>Folders</h2>
+        <h2 className="Folders-h2">Folders</h2>
         <ul>
           <li key="All">
             <NavLink aria-label={"All folders"} to={`/`}>
@@ -32,13 +32,17 @@ class Folders extends React.Component {
             </NavLink>
           </li>
           {folders.map((folder) => (
-            <li className="Group" key={folder.id}>
+            <li className="group" key={folder.id}>
               <NavLink
                 onClick={() => this.handleOnClick(folder.id)}
                 aria-label={folder.title}
                 to={`/folder/${folder.id}`}
               >
-                <p className={this.state.id === folder.id ? "Active" : ""}>
+                <p
+                  className={
+                    this.state.id === folder.id ? "Folders-active" : ""
+                  }
+                >
                   {folder.title}
                 </p>
               </NavLink>
@@ -46,7 +50,7 @@ class Folders extends React.Component {
                 <button
                   type="button"
                   aria-label="Edit Folder Button"
-                  className="Button__edit_folder"
+                  className="Folders-edit-button"
                 >
                   Edit
                 </button>

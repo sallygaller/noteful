@@ -1,0 +1,17 @@
+.NoteContent-button {
+    background-color: #a5a58d;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 0px;
+    font-size: 12px;
+    padding: 6px 8px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: normal;
+    margin-top: 0px;
+}
+
+.NoteContent-p {
+    font-size: 14px;
+    margin-top: 0px;
+}

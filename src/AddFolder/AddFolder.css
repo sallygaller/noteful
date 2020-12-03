@@ -1,29 +1,25 @@
- 
-form {
+.AddFolder-form {
     padding-bottom: 16px;
     max-width: 332px;
   }
   
-  label {
+label {
     display: block;
     font-size: 16px;
     padding-bottom: 8px;
   }
-  
-input {
+ 
+.AddFolder-h3 {
+  font-size: 18px
+}  
+
+.AddFolder-input {
     font-size: 14px;
     padding: 8px;
     margin-bottom: 8px;
-    font-family: sans-serif;
-  }
-
-textarea {
-  font-size: 14px;
-  width: 500px;
-  font-family: sans-serif;
 }
   
-button {
+.AddFolder-button {
     background-color: #a5a58d;
     cursor: pointer;
     border-radius: 4px;
@@ -35,8 +31,5 @@ button {
     text-align: center;
     text-decoration: none;
     margin-right: 5px;
-  }
+}
 
-  button:hover {
-    background-color: #b7b7a4;
-  }

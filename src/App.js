@@ -1,18 +1,19 @@
 import React, { Component } from "react";
 import { Route, Link, Switch } from "react-router-dom";
-import "./App.css";
 import config from "./config";
 import StoreContext from "./StoreContext";
-import Folders from "./Folders";
-import NotesSelectList from "./NotesSelectList";
-import AddNote from "./AddNote";
-import Nav from "./Nav";
-import NoteContent from "./NoteContent";
-import NotesList from "./NotesList";
-import AddFolder from "./AddFolder";
-import EditFolder from "./EditFolder";
-import EditNote from "./EditNote";
-import Error from "./Error";
+import AddFolder from "./AddFolder/AddFolder";
+import AddNote from "./AddNote/AddNote";
+import EditFolder from "./EditFolder/EditFolder";
+import EditNote from "./EditNote/EditNote";
+import Folders from "./Folders/Folders";
+import Nav from "./Nav/Nav";
+import NoteContent from "./NoteContent/NoteContent";
+import NotesList from "./NotesList/NotesList";
+import NotesSelectList from "./NotesSelectList/NotesSelectList";
+import "./App.css";
+
+import Error from "./Error/Error";
 
 class App extends Component {
   state = {
@@ -56,17 +57,16 @@ class App extends Component {
   };
 
   componentDidMount() {
-    console.log("mounted!");
     Promise.all([
       fetch(config.API_ENDPOINT_FOLDERS),
       fetch(config.API_ENDPOINT_NOTES),
     ])
       .then(([notesResponse, foldersResponse]) => {
         if (!foldersResponse.ok) {
-          console.log("oh no").then((e) => Promise.reject(e));
+          return foldersResponse.json().then((error) => Promise.reject(error));
         }
         if (!notesResponse.ok) {
-          console.log("oh no").then((e) => Promise.reject(e));
+          return notesResponse.json().then((error) => Promise.reject(error));
         }
         return Promise.all([notesResponse.json(), foldersResponse.json()]);
       })
@@ -91,9 +91,9 @@ class App extends Component {
     return (
       <div>
         <header>
-          <div className="App__header">
+          <div className="App-header">
             <Link to="/">
-              <h1>Noteful</h1>
+              <h1 className="App-h1">Noteful</h1>
             </Link>
           </div>
         </header>
@@ -101,13 +101,13 @@ class App extends Component {
         <main>
           <StoreContext.Provider value={value}>
             <div className="App">
-              <div className="App__nav ">
+              <div className="App-nav ">
                 <Error>
                   <Folders />
                   <Nav />
                 </Error>
               </div>
-              <div className="App__main">
+              <div className="App-main">
                 <Switch>
                   <Error>
                     <Route path="/add-folder" component={AddFolder} />

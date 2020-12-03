@@ -1,7 +1,8 @@
-import React from "react";
-import Note from "./Note";
-import StoreContext from "./StoreContext";
 import { createBrowserHistory } from "history";
+import React from "react";
+import Note from "../Note/Note";
+import StoreContext from "../StoreContext";
+import "./NoteContent.css";
 
 const history = createBrowserHistory();
 function handleBack() {
@@ -35,12 +36,16 @@ class NoteContent extends React.Component {
           modified={note.modified}
           onDeleteNote={this.handleDeleteNote}
         />
-        <div className="NotePageMain__content">
+        <div className="NoteContent-p">
           {note.content.split(/\n \r|\n/).map((para, i) => (
             <p key={i}>{para}</p>
           ))}
         </div>
-        <button className="Small_button" type="button" onClick={handleBack}>
+        <button
+          className="NoteContent-button"
+          type="button"
+          onClick={handleBack}
+        >
           Back
         </button>
       </div>

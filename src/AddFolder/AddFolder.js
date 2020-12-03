@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import StoreContext from "./StoreContext";
-import "./Add.css";
-import config from "./config";
+import config from "../config";
+import StoreContext from "../StoreContext";
+import "./AddFolder.css";
 
-class AddNote extends React.Component {
+class AddFolder extends React.Component {
   static propTypes = {
     history: PropTypes.shape({
       push: PropTypes.func,
@@ -17,23 +17,17 @@ class AddNote extends React.Component {
     error: null,
   };
 
-  handleClickCancel = () => {
-    this.props.history.push("/");
-  };
-
   handleSubmit = (e) => {
     e.preventDefault();
-    const { title, content, folderId } = e.target;
-    const note = {
+    const { title } = e.target;
+    const folder = {
       title: title.value,
-      content: content.value,
-      folder_id: Number(folderId.value),
-      modified: new Date(),
     };
-    if (note.title) {
-      fetch(config.API_ENDPOINT_NOTES, {
+    this.setState({ error: null });
+    if (folder.title) {
+      fetch(config.API_ENDPOINT_FOLDERS, {
         method: "POST",
-        body: JSON.stringify(note),
+        body: JSON.stringify(folder),
         headers: {
           "content-type": "application/json",
         },
@@ -47,7 +41,7 @@ class AddNote extends React.Component {
           return res.json();
         })
         .then((data) => {
-          this.context.addNote(data);
+          this.context.addFolder(data);
           this.props.history.push("/");
         })
         .catch((error) => {
@@ -58,45 +52,38 @@ class AddNote extends React.Component {
         });
     } else {
       this.setState({
-        errorMessage: "Please ensure the above fields are completed.",
+        errorMessage: "Please ensure the above field is completed.",
       });
     }
   };
 
+  handleClickCancel = () => {
+    this.props.history.push("/");
+  };
+
   render() {
-    const { folders = [] } = this.context;
     return (
       <div>
-        <h3>Add Note</h3>
-        <form onSubmit={(e) => this.handleSubmit(e)}>
+        <h3 className="AddFolder-h3">Add Folder</h3>
+        <form className="AddFolder-form" onSubmit={(e) => this.handleSubmit(e)}>
           <input
             type="text"
             name="title"
-            placeholder="Note name"
-            aria-label="Note name"
+            placeholder="Folder name"
+            aria-label="Folder name"
+            className="AddFolder-input"
             required
           />
-          <label style={{ fontSize: "14px" }}>Select folder</label>
-          <select name="folderId">
-            {folders.map((folder) => (
-              <option id={folder.id} value={folder.id} name="folder_id">
-                {folder.title}
-              </option>
-            ))}
-          </select>
-          <br />
-          <input
-            className="Note__Content"
-            type="text"
-            name="content"
-            aria-label="Note content"
-            required
-          />
-          <div className="Group">
-            <button type="submit" aria-label="Submit button">
+          <div className="group">
+            <button
+              className="AddFolder-button"
+              type="submit"
+              aria-label="Submit button"
+            >
               Save
             </button>
             <button
+              className="AddFolder-button"
               type="button"
               onClick={this.handleClickCancel}
               aria-label="Cancel button"
@@ -111,4 +98,4 @@ class AddNote extends React.Component {
   }
 }
 
-export default AddNote;
+export default AddFolder;

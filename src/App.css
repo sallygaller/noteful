@@ -2,12 +2,12 @@
   font-family: sans-serif;
   display: grid;
   grid-template-areas: "sidebar header" "sidebar main";
-  grid-template-columns: 1fr 2.3fr;
+  grid-template-columns: 0.6fr 2.3fr;
   grid-template-rows: 0px 1fr;
   min-height: 100vh;
 }
 
-.App__header {
+.App-header {
   background-color: #fff1e6;
   grid-area: header;
   padding-left: 16px;
@@ -15,32 +15,31 @@
   margin-bottom: 0px;
 }
 
-.App__header a {
+.App-header a {
   color: black;
 }
 
-.App__nav {
+.App-nav {
   background-color: #fff1e6;
   padding-left: 25px;
   grid-area: sidebar;
   overflow: auto;
 }
 
-.App__main {
+.App-main {
   background-color: #eddcd2;
   grid-area: main;
   overflow: auto;
   padding-left: 25px;
 }
 
-
-h1 {
+.App-h1 {
   text-align: center;
   padding-bottom: 25px;
   margin-bottom: 0px;
 }
 
-h2 {
+.App-h2 {
   margin-bottom: 5px;
   font-size: 20px;
 }
@@ -54,51 +53,8 @@ ul {
   list-style: none;
 }
 
-.Sidebar li {
-  padding-bottom: 5px;
-}
-
-.Button__edit_folder {
-    background-color: #eddcd2;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 12px;
-    padding: 4px;
-    text-align: center;
-    margin-top: 0px;
-    text-decoration: none;
-    font-weight: normal;
-    border-color: black;
-    border-width: medium;
-    margin-left: 10px;
-  }
-
-  .Modified {
-    font-size: 14px;
-    margin-top: 0px;
-  }
-
-  .Button__small {
-    background-color: #a5a58d;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 12px;
-    padding: 4px;
-    text-align: center;
-    margin-top: 0px;
-    text-decoration: none;
-    font-weight: normal;
-    border-color: black;
-    border-width: medium;
-    margin-left: 10px;
-  }
-
-  .Group {
+.group {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-  }
-
-.Active {
-  font-weight: bold;
 }

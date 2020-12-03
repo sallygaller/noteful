@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import StoreContext from "./StoreContext";
-import Note from "./Note";
 import PropTypes from "prop-types";
+import StoreContext from "../StoreContext";
+import Note from "../Note/Note";
+import "./NotesList.css";
 
 class NotesList extends React.Component {
   static defaultProps = {
@@ -13,7 +14,7 @@ class NotesList extends React.Component {
     const { notes = [] } = this.context;
     return (
       <div>
-        <h2>Notes</h2>
+        <h2 className="NotesList-h2">Notes</h2>
         <ul>
           {notes.map((note) => (
             <li key={note.id}>

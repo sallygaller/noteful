@@ -1,0 +1,22 @@
+ul {
+    padding-left: 0px;
+    margin-top: 0px;
+}
+
+.Note-modified {
+    font-size: 14px;
+    margin-top: 0px;
+}
+
+.Note-button {
+    background-color: #a5a58d;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 0px;
+    font-size: 12px;
+    padding: 6px 8px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: normal;
+    margin: 0px 6px;
+}

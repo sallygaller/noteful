@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import config from "./config";
-import StoreContext from "./StoreContext";
-import "./Edit.css";
+import config from "../config";
+import StoreContext from "../StoreContext";
+import "./EditNote.css";
 
-class EditFolder extends React.Component {
+class EditNote extends React.Component {
   static propTypes = {
     match: PropTypes.shape({
       params: PropTypes.object,
@@ -17,13 +17,15 @@ class EditFolder extends React.Component {
   static contextType = StoreContext;
 
   state = {
+    error: null,
     id: "",
     title: "",
+    content: "",
   };
 
   componentDidMount() {
-    const { folderId } = this.props.match.params;
-    fetch(config.API_ENDPOINT_FOLDERS + `/${folderId}`, {
+    const { noteId } = this.props.match.params;
+    fetch(config.API_ENDPOINT_NOTES + `/${noteId}`, {
       method: "GET",
     })
       .then((res) => {
@@ -34,6 +36,8 @@ class EditFolder extends React.Component {
         this.setState({
           id: responseData.id,
           title: responseData.title,
+          content: responseData.content,
+          modified: new Date(),
         });
       })
       .catch((error) => {
@@ -46,14 +50,18 @@ class EditFolder extends React.Component {
     this.setState({ title: e.target.value });
   };
 
+  handleChangeContent = (e) => {
+    this.setState({ content: e.target.value });
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
-    const { folderId } = this.props.match.params;
-    const { id, title } = this.state;
-    const newFolder = { id, title };
-    fetch(config.API_ENDPOINT_FOLDERS + `/${folderId}`, {
+    const { noteId } = this.props.match.params;
+    const { id, title, content } = this.state;
+    const newNote = { id, title, content };
+    fetch(config.API_ENDPOINT_NOTES + `/${noteId}`, {
       method: "PATCH",
-      body: JSON.stringify(newFolder),
+      body: JSON.stringify(newNote),
       headers: {
         "content-type": "application/json",
       },
@@ -62,8 +70,8 @@ class EditFolder extends React.Component {
         if (!res.ok) return res.json().then((error) => Promise.reject(error));
       })
       .then(() => {
-        this.resetFields(newFolder);
-        this.context.updateFolder(newFolder);
+        this.resetFields(newNote);
+        this.context.updateNote(newNote);
         this.props.history.push("/");
       })
       .catch((error) => {
@@ -76,6 +84,7 @@ class EditFolder extends React.Component {
     this.setState({
       id: newFields.id || "",
       title: newFields.title || "",
+      content: newFields.content || "",
     });
   };
 
@@ -84,15 +93,15 @@ class EditFolder extends React.Component {
   };
 
   render() {
-    const { error, title } = this.state;
+    const { error, title, content } = this.state;
     return (
       <section>
-        <h2>Edit folder</h2>
+        <h2 className="EditNote-h2">Edit note</h2>
         <form onSubmit={this.handleSubmit}>
           <div role="alert">{error && <p>{error.message}</p>}</div>
           <input type="hidden" name="id" />
           <div>
-            <label htmlFor="title">Title </label>
+            <label htmlFor="title">Title</label>
             <input
               type="text"
               name="title"
@@ -102,11 +111,26 @@ class EditFolder extends React.Component {
               onChange={this.handleChangeTitle}
             />
           </div>
-          <div className="Group">
-            <button type="button" onClick={this.handleClickCancel}>
+          <div>
+            <label htmlFor="content">Content</label>
+            <textarea
+              name="content"
+              id="content"
+              value={content}
+              onChange={this.handleChangeContent}
+            />
+          </div>
+          <div className="group">
+            <button className="EditNote-button" type="submit">
+              Save
+            </button>
+            <button
+              className="EditNote-button"
+              type="button"
+              onClick={this.handleClickCancel}
+            >
               Cancel
             </button>{" "}
-            <button type="submit">Save</button>
           </div>
         </form>
       </section>
@@ -114,4 +138,4 @@ class EditFolder extends React.Component {
   }
 }
 
-export default EditFolder;
+export default EditNote;

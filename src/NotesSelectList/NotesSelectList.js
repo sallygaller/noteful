@@ -1,6 +1,7 @@
 import React from "react";
-import StoreContext from "./StoreContext";
-import Note from "./Note";
+import StoreContext from "../StoreContext";
+import Note from "../Note/Note";
+import "./NotesSelectList.css";
 
 class NotesSelectList extends React.Component {
   static defaultProps = {
@@ -21,7 +22,7 @@ class NotesSelectList extends React.Component {
     const notesForFolder = getNotesForFolder(notes, folderIdNum);
     return (
       <div>
-        <h2>Notes</h2>
+        <h2 className="NotesSelectList-h2">Notes</h2>
         <ul>
           {notesForFolder.map((note) => (
             <li key={note.id}>
