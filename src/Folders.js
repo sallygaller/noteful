@@ -7,6 +7,19 @@ import { Link } from "react-router-dom";
 class Folders extends React.Component {
   static contextType = StoreContext;
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: null,
+    };
+  }
+
+  handleOnClick = (id) => {
+    this.setState({
+      id,
+    });
+  };
+
   render() {
     const { folders = [] } = this.context;
     return (
@@ -20,8 +33,14 @@ class Folders extends React.Component {
           </li>
           {folders.map((folder) => (
             <li className="Group" key={folder.id}>
-              <NavLink aria-label={folder.title} to={`/folder/${folder.id}`}>
-                <p>{folder.title}</p>
+              <NavLink
+                onClick={() => this.handleOnClick(folder.id)}
+                aria-label={folder.title}
+                to={`/folder/${folder.id}`}
+              >
+                <p className={this.state.id === folder.id ? "Active" : ""}>
+                  {folder.title}
+                </p>
               </NavLink>
               <Link to={`/edit/folder/${folder.id}`}>
                 <button

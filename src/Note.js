@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
 import StoreContext from "./StoreContext";
 import PropTypes from "prop-types";
 import config from "./config";
@@ -67,7 +68,9 @@ class Note extends React.Component {
             </button>
           </Link>
         </div>
-        <p className="Text__modified">Date modified: {modified}</p>
+        <p className="Text__modified">
+          Date modified: {format(new Date(modified), "PPpp")}
+        </p>
       </div>
     );
   }

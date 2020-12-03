@@ -99,3 +99,6 @@ ul {
     align-items: center;
   }
 
+.Active {
+  font-weight: bold;
+}
