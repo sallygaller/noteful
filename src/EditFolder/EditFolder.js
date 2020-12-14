@@ -17,6 +17,7 @@ class EditFolder extends React.Component {
   static contextType = StoreContext;
 
   state = {
+    error: null,
     id: "",
     title: "",
   };
@@ -88,11 +89,13 @@ class EditFolder extends React.Component {
     return (
       <section>
         <h2 className="EditFolder-h2">Edit folder</h2>
-        <form onSubmit={this.handleSubmit}>
+        <form className="EditFolder-form" onSubmit={this.handleSubmit}>
           <div role="alert">{error && <p>{error.message}</p>}</div>
           <input type="hidden" name="id" />
           <div>
-            <label htmlFor="title">Title </label>
+            <label className="EditFolder-label" htmlFor="title">
+              Title{" "}
+            </label>
             <input
               type="text"
               name="title"

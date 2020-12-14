@@ -1,25 +1,26 @@
-form {
+.EditNote-form {
     padding-bottom: 16px;
     max-width: 332px;
-  }
+}
   
-label {
+.EditNote-label {
     display: block;
     font-size: 16px;
     padding-bottom: 8px;
 }
   
-input {
+.EditNote-input {
     font-size: 14px;
     padding: 8px;
     margin-bottom: 8px;
     font-family: sans-serif;
   }
 
-textarea {
+.EditNote-textarea {
   font-size: 14px;
   width: 500px;
   font-family: sans-serif;
+  margin-bottom: 15px;
 }
   
 .EditNote-button {

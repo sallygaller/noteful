@@ -5,6 +5,17 @@ import StoreContext from "../StoreContext";
 import "./EditNote.css";
 
 class EditNote extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      id: "",
+      title: "",
+      content: "",
+      modified: "",
+    };
+  }
+
   static propTypes = {
     match: PropTypes.shape({
       params: PropTypes.object,
@@ -15,13 +26,6 @@ class EditNote extends React.Component {
   };
 
   static contextType = StoreContext;
-
-  state = {
-    error: null,
-    id: "",
-    title: "",
-    content: "",
-  };
 
   componentDidMount() {
     const { noteId } = this.props.match.params;
@@ -85,6 +89,7 @@ class EditNote extends React.Component {
       id: newFields.id || "",
       title: newFields.title || "",
       content: newFields.content || "",
+      modified: newFields.modified || "",
     });
   };
 
@@ -97,13 +102,16 @@ class EditNote extends React.Component {
     return (
       <section>
         <h2 className="EditNote-h2">Edit note</h2>
-        <form onSubmit={this.handleSubmit}>
+        <form className="EditNote-form" onSubmit={this.handleSubmit}>
           <div role="alert">{error && <p>{error.message}</p>}</div>
           <input type="hidden" name="id" />
           <div>
-            <label htmlFor="title">Title</label>
+            <label className="EditNote-label" htmlFor="title">
+              Title
+            </label>
             <input
               type="text"
+              className="EditNote-input"
               name="title"
               id="title"
               required
@@ -112,8 +120,11 @@ class EditNote extends React.Component {
             />
           </div>
           <div>
-            <label htmlFor="content">Content</label>
+            <label className="EditNote-label" htmlFor="content">
+              Content
+            </label>
             <textarea
+              className="EditNote-textarea"
               name="content"
               id="content"
               value={content}

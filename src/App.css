@@ -2,7 +2,7 @@
   font-family: sans-serif;
   display: grid;
   grid-template-areas: "sidebar header" "sidebar main";
-  grid-template-columns: 0.6fr 2.3fr;
+  grid-template-columns: 1fr 2.3fr;
   grid-template-rows: 0px 1fr;
   min-height: 100vh;
 }

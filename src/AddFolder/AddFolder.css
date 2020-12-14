@@ -1,13 +1,7 @@
 .AddFolder-form {
     padding-bottom: 16px;
     max-width: 332px;
-  }
-  
-label {
-    display: block;
-    font-size: 16px;
-    padding-bottom: 8px;
-  }
+}
  
 .AddFolder-h3 {
   font-size: 18px
@@ -16,7 +10,7 @@ label {
 .AddFolder-input {
     font-size: 14px;
     padding: 8px;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
 }
   
 .AddFolder-button {

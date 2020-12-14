@@ -1,5 +1,5 @@
-import { createBrowserHistory } from "history";
 import React from "react";
+import { createBrowserHistory } from "history";
 import Note from "../Note/Note";
 import StoreContext from "../StoreContext";
 import "./NoteContent.css";

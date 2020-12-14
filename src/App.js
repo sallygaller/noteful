@@ -50,8 +50,8 @@ class App extends Component {
 
   handleUpdateFolder = (updatedFolder) => {
     this.setState({
-      notes: this.state.notes.map((n) =>
-        n.id !== updatedFolder.id ? n : updatedFolder
+      folders: this.state.folders.map((f) =>
+        f.id !== updatedFolder.id ? f : updatedFolder
       ),
     });
   };
@@ -88,6 +88,8 @@ class App extends Component {
       updateNote: this.handleUpdateNote,
       updateFolder: this.handleUpdateFolder,
     };
+    console.log(this.state.notes);
+    console.log(this.state.folders);
     return (
       <div>
         <header>

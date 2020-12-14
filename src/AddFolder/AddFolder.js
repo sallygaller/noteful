@@ -5,6 +5,12 @@ import StoreContext from "../StoreContext";
 import "./AddFolder.css";
 
 class AddFolder extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+    };
+  }
   static propTypes = {
     history: PropTypes.shape({
       push: PropTypes.func,
@@ -12,10 +18,6 @@ class AddFolder extends React.Component {
   };
 
   static contextType = StoreContext;
-
-  state = {
-    error: null,
-  };
 
   handleSubmit = (e) => {
     e.preventDefault();

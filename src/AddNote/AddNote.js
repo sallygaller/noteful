@@ -86,9 +86,8 @@ class AddNote extends React.Component {
             ))}
           </select>
           <br />
-          <input
-            className="AddNote-content"
-            type="textarea"
+          <textarea
+            className="AddNote-textarea"
             name="content"
             aria-label="Note content"
             required

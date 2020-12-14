@@ -7,26 +7,32 @@ import config from "../config";
 import "./Note.css";
 
 class Note extends React.Component {
-  static defaultProps = {
-    onDeleteNote: () => {},
-  };
+  // static defaultProps = {
+  //   onDeleteNote: () => {},
+  // };
 
   static contextType = StoreContext;
 
-  deleteNoteRequest = (noteId, cn) => {
+  static propTypes = {
+    history: PropTypes.shape({
+      push: PropTypes.func,
+    }).isRequired,
+  };
+
+  deleteNoteRequest = (noteId) => {
+    console.log(noteId);
     fetch(config.API_ENDPOINT_NOTES + `/${noteId}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
       },
     })
-      .then((response) => {
-        if (!response.ok)
-          return response.json().then((error) => Promise.reject(error));
-        return response.json();
+      .then((res) => {
+        if (!res.ok) return res.json().then((error) => Promise.reject(error));
+        return res;
       })
       .then((data) => {
-        cn(noteId);
+        this.context.deleteNote(noteId);
       })
       .catch((error) => {
         console.error({ error });
@@ -61,15 +67,14 @@ class Note extends React.Component {
             aria-label="Delete button"
             className="Note-button"
             type="button"
-            onClick={() =>
-              this.deleteNoteRequest(id, StoreContext.deleteNoteRequest)
-            }
+            onClick={() => this.deleteNoteRequest(id)}
           >
             Delete
           </button>
         </div>
         <p className="Note-modified">
-          Date modified: {format(new Date(modified), "PPpp")}
+          {/* Date modified: {format(new Date(modified), "PPpp")} */}
+          Date modified: {modified}
         </p>
       </div>
     );
