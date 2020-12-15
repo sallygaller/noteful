@@ -1,16 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { format } from "date-fns";
 import PropTypes from "prop-types";
 import StoreContext from "../StoreContext";
 import config from "../config";
 import "./Note.css";
 
 class Note extends React.Component {
-  // static defaultProps = {
-  //   onDeleteNote: () => {},
-  // };
-
   static contextType = StoreContext;
 
   static propTypes = {
@@ -72,10 +67,7 @@ class Note extends React.Component {
             Delete
           </button>
         </div>
-        <p className="Note-modified">
-          {/* Date modified: {format(new Date(modified), "PPpp")} */}
-          Date modified: {modified}
-        </p>
+        <p className="Note-modified">Date modified: {modified}</p>
       </div>
     );
   }
