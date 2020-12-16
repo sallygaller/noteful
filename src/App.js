@@ -88,8 +88,6 @@ class App extends Component {
       updateNote: this.handleUpdateNote,
       updateFolder: this.handleUpdateFolder,
     };
-    console.log(this.state.notes);
-    console.log(this.state.folders);
     return (
       <div>
         <header>

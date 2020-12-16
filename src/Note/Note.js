@@ -15,7 +15,6 @@ class Note extends React.Component {
   };
 
   deleteNoteRequest = (noteId) => {
-    console.log(noteId);
     fetch(config.API_ENDPOINT_NOTES + `/${noteId}`, {
       method: "DELETE",
       headers: {
