@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import StoreContext from "../StoreContext";
 import config from "../config";
@@ -27,6 +27,7 @@ class Note extends React.Component {
       })
       .then((data) => {
         this.context.deleteNote(noteId);
+        this.props.history.push("/");
       })
       .catch((error) => {
         console.error({ error });
@@ -78,4 +79,4 @@ Note.propTypes = {
   modified: PropTypes.string.isRequired,
 };
 
-export default Note;
+export default withRouter(Note);
